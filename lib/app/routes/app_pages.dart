@@ -7,6 +7,8 @@ import 'package:trivia_mobile/app/modules/trivia_form/class/trivia_form_argument
 import 'package:trivia_mobile/app/modules/trivia_form/views/trivia_form_view.dart';
 import 'package:trivia_mobile/app/modules/trivia_question/bindings/trivia_question_binding.dart';
 import 'package:trivia_mobile/app/modules/trivia_question/views/trivia_question_view.dart';
+import 'package:trivia_mobile/app/modules/trivia_showed_answer/bindings/trivia_showed_answer_binding.dart';
+import 'package:trivia_mobile/app/modules/trivia_showed_answer/views/trivia_showed_answer_view.dart';
 
 part 'app_routes.dart';
 
@@ -34,6 +36,11 @@ class AppPages {
         argument: Get.arguments as List<TriviaFormDataModel>,
       ),
       binding: TriviaQuestionBinding(),
+    ),
+    GetPage<void>(
+      name: _Paths.TRIVIA_SHOWED_ANSWER,
+      page: TriviaShowedAnswerView.new,
+      binding: TriviaShowedAnswerBinding(),
     ),
   ];
 }

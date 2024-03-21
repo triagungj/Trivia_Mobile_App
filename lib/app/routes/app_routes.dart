@@ -6,6 +6,7 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const TRIVIA_FORM = _Paths.TRIVIA_FORM;
   static const TRIVIA_QUESTION = _Paths.TRIVIA_QUESTION;
+  static const TRIVIA_SHOWED_ANSWER = _Paths.TRIVIA_SHOWED_ANSWER;
 }
 
 abstract class _Paths {
@@ -13,4 +14,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const TRIVIA_FORM = '/trivia-form';
   static const TRIVIA_QUESTION = '/trivia-question';
+  static const TRIVIA_SHOWED_ANSWER = '/trivia-showed-answer';
 }

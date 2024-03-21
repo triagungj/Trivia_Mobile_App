@@ -12,6 +12,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        dialogBackgroundColor: Colors.white,
       ),
       getPages: AppPages.routes,
       initialRoute: Routes.HOME,

@@ -53,20 +53,6 @@ class TriviaQuestionView extends GetView<TriviaQuestionController> {
               ) {
                 return Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15, bottom: 10),
-                      child: Obx(
-                        () => Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            const Text('Ansered: '),
-                            Text(
-                              '${controller.answeredQuestion} / ${controller.totalQuestion}',
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                     Row(
                       children: [
                         Expanded(
@@ -100,17 +86,7 @@ class TriviaQuestionView extends GetView<TriviaQuestionController> {
                                 setIndex(controller.currentIndex + 1);
                                 controller.increment();
                               } else {
-                                Get.dialog<void>(
-                                  const Dialog(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text('GoodJob'),
-                                        Text('GoodJob'),
-                                      ],
-                                    ),
-                                  ),
-                                );
+                                controller.confirmAswer(argument);
                               }
                             },
                             style: TextButton.styleFrom(
@@ -160,9 +136,24 @@ class TriviaQuestionView extends GetView<TriviaQuestionController> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Obx(
-                        () => Text(
-                          'Question: ${controller.currentIndex + 1} / ${argument.length}',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        () => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Question: ${controller.currentIndex + 1} / ${argument.length}',
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                const Text('Answered: '),
+                                Text(
+                                  '${controller.answeredQuestion} / ${controller.totalQuestion}',
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 5),
