@@ -34,7 +34,7 @@ class TriviaFormController extends GetxController {
         amount:
             triviaFormKey.currentState?.instantValue['questionTotal'] as String,
         type: triviaFormKey.currentState?.instantValue['typeRadio']
-            as QuestionTypeEnum,
+            as QuestionTypeEnum?,
         category:
             triviaFormKey.currentState?.instantValue['categoryDropdown'] as int,
         difficulty: triviaFormKey

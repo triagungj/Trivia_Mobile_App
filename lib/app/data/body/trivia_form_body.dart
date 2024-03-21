@@ -8,14 +8,14 @@ part 'trivia_form_body.g.dart';
 class TriviaFormBody {
   TriviaFormBody({
     required this.amount,
-    required this.type,
     required this.category,
     required this.difficulty,
+    this.type,
   });
 
   final String amount;
   final int category;
-  final QuestionTypeEnum type;
+  final QuestionTypeEnum? type;
   final DifficultyEnum difficulty;
 
   Map<String, dynamic> toJson() => _$TriviaFormBodyToJson(this);

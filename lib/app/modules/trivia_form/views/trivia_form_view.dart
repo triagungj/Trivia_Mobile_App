@@ -63,7 +63,7 @@ class TriviaFormView extends GetView<TriviaFormController> {
                 name: 'difficultyDropdown',
                 initialValue: DifficultyEnum.values.first,
                 decoration: const InputDecoration(
-                  labelText: 'Category',
+                  labelText: 'Difficulty',
                 ),
                 items: List.generate(
                   DifficultyEnum.values.length,
@@ -78,7 +78,6 @@ class TriviaFormView extends GetView<TriviaFormController> {
               const SizedBox(height: 5),
               FormBuilderRadioGroup(
                 name: 'typeRadio',
-                initialValue: QuestionTypeEnum.values.first,
                 decoration: const InputDecoration(
                   labelText: 'Questyion Type',
                 ),
