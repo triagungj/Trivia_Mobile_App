@@ -6,6 +6,25 @@ class TriviaShowedAnswerController extends GetxController {
   TriviaShowedAnswerController({required this.argument});
 
   final TriviaShowedAnswerArgument argument;
+  final _currentIndex = RxInt(0);
+  int get currentIndex => _currentIndex.value;
+
+  final _precentage = RxDouble(0);
+  double get precentage => _precentage.value;
+
+  void increment() => _currentIndex.value++;
+  void decrement() => _currentIndex.value--;
+
+  void updatePrecentage() {
+    _precentage.value =
+        (_currentIndex.value + 1) / argument.listQuestion.length;
+  }
+
+  @override
+  void onInit() {
+    updatePrecentage();
+    super.onInit();
+  }
 
   @override
   void onReady() {
@@ -45,6 +64,30 @@ class TriviaShowedAnswerController extends GetxController {
                 ),
               ),
               Text('from ${argument.listQuestion.length} Questions'),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Get
+                          ..close(1)
+                          ..back<void>();
+                      },
+                      child: const Text('Back to Home'),
+                    ),
+                    const SizedBox(width: 10),
+                    FilledButton(
+                      onPressed: () {
+                        Get.close(1);
+                      },
+                      child: const Text('Show Answers'),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

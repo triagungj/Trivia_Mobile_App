@@ -42,13 +42,16 @@ class TriviaQuestionController extends GetxController {
     List<TriviaFormDataModel> questions,
   ) {
     const formName = 'question#';
-
     final listAnswer = <String?>[];
+    var totalAnswered = 0;
 
     for (var i = 0; i < _totalQuestion.value; i++) {
       listAnswer.add(
         triviaQuestionKey.currentState!.instantValue['$formName$i'] as String?,
       );
+      if (triviaQuestionKey.currentState!.instantValue['$formName$i'] != null) {
+        totalAnswered++;
+      }
     }
 
     Get.dialog<void>(
@@ -109,12 +112,16 @@ class TriviaQuestionController extends GetxController {
                     onPressed: () {
                       Get
                         ..close(1)
-                        ..toNamed<void>(
+                        ..offNamedUntil<void>(
                           Routes.TRIVIA_SHOWED_ANSWER,
                           arguments: TriviaShowedAnswerArgument(
                             listAnswer: listAnswer,
                             listQuestion: questions,
+                            totalAnswered: totalAnswered,
                           ),
+                          (route) {
+                            return route.settings.name == Routes.HOME;
+                          },
                         );
                     },
                     child: const Text('Confirm'),
