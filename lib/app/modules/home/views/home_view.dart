@@ -21,7 +21,7 @@ class HomeView extends GetView<HomeController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Trivia App'),
+        title: const Text('Trivia'),
         centerTitle: true,
       ),
       body: Obx(
@@ -46,9 +46,17 @@ class HomeView extends GetView<HomeController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Text('Select Category'),
+                      const SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'Select Category',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20,
+                          ),
+                        ),
                       ),
                       GridView.count(
                         primary: false,
