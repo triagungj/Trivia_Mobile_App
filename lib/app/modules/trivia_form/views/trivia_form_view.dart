@@ -47,6 +47,16 @@ class TriviaFormView extends GetView<TriviaFormController> {
                 decoration: const InputDecoration(
                   labelText: 'Number of Question',
                 ),
+                validator: (value) {
+                  if (value == null) {
+                    return 'Required';
+                  }
+                  final total = int.parse(value);
+                  if (total < 1) {
+                    return 'Invalid Number. Minimum number is 1';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 5),
               FormBuilderDropdown(
@@ -91,7 +101,10 @@ class TriviaFormView extends GetView<TriviaFormController> {
                     onPressed: controller.state == TriviaFormState.loading
                         ? null
                         : () {
-                            controller.getTriviaForm();
+                            if (controller.triviaFormKey.currentState!
+                                .validate()) {
+                              controller.getTriviaForm();
+                            }
                           },
                     child: controller.state == TriviaFormState.loading
                         ? const Padding(
