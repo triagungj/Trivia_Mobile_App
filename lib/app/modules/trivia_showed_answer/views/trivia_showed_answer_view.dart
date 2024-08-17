@@ -129,114 +129,110 @@ class TriviaShowedAnswerView extends GetView<TriviaShowedAnswerController> {
                     i,
                 ]..shuffle();
 
-                return Padding(
+                return ListView(
                   padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Obx(
-                        () => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Question: ${controller.currentIndex + 1} / ${controller.argument.listQuestion.length}',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                const Text('Answered: '),
-                                Text(
-                                  '${controller.argument.totalAnswered} / ${controller.argument.listAnswer.length}',
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        unescape.convert(
-                          controller.argument.listQuestion[index].question,
-                        ),
-                      ),
-                      FormBuilderRadioGroup(
-                        name: formName,
-                        orientation: OptionsOrientation.vertical,
-                        enabled: false,
-                        initialValue: controller.argument.listAnswer[index],
-                        options: List.generate(
-                          listAnswer.length,
-                          (index) => FormBuilderFieldOption<String>(
-                            value: listAnswer[index],
-                            child: Text(unescape.convert(listAnswer[index])),
+                  children: [
+                    Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Question: ${controller.currentIndex + 1} / ${controller.argument.listQuestion.length}',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text('Answered: '),
+                              Text(
+                                '${controller.argument.totalAnswered} / ${controller.argument.listAnswer.length}',
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      unescape.convert(
+                        controller.argument.listQuestion[index].question,
+                      ),
+                    ),
+                    FormBuilderRadioGroup(
+                      name: formName,
+                      orientation: OptionsOrientation.vertical,
+                      enabled: false,
+                      initialValue: controller.argument.listAnswer[index],
+                      options: List.generate(
+                        listAnswer.length,
+                        (index) => FormBuilderFieldOption<String>(
+                          value: listAnswer[index],
+                          child: Text(unescape.convert(listAnswer[index])),
                         ),
                       ),
-                      const SizedBox(height: 15),
-                      if (controller.argument.listAnswer[index] ==
-                          controller.argument.listQuestion[index].correctAnswer)
-                        const Row(
-                          children: [
-                            Icon(
-                              Icons.check_circle,
-                              color: Colors.green,
+                    ),
+                    const SizedBox(height: 15),
+                    if (controller.argument.listAnswer[index] ==
+                        controller.argument.listQuestion[index].correctAnswer)
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.check_circle,
+                            color: Colors.green,
+                          ),
+                          Text(
+                            ' Correct!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
                             ),
-                            Text(
-                              ' Correct!',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
+                          ),
+                        ],
+                      )
+                    else
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const Row(
+                            children: [
+                              Icon(
+                                Icons.disabled_by_default,
+                                color: Colors.red,
                               ),
-                            ),
-                          ],
-                        )
-                      else
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            const Row(
-                              children: [
-                                Icon(
-                                  Icons.disabled_by_default,
-                                  color: Colors.red,
+                              Text(
+                                ' Incorrect!',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
                                 ),
-                                Text(
-                                  ' Incorrect!',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              const Text(
+                                'Correct Answer: ',
+                                style: TextStyle(
+                                  fontSize: 16,
                                 ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              children: [
-                                const Text(
-                                  'Correct Answer: ',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
+                              ),
+                              Text(
+                                unescape.convert(
+                                  controller.argument.listQuestion[index]
+                                      .correctAnswer,
                                 ),
-                                Text(
-                                  unescape.convert(
-                                    controller.argument.listQuestion[index]
-                                        .correctAnswer,
-                                  ),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    const SizedBox(height: 10),
+                  ],
                 );
               },
             ),

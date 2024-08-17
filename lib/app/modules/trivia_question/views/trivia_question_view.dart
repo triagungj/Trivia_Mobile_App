@@ -130,74 +130,70 @@ class TriviaQuestionView extends GetView<TriviaQuestionController> {
                   for (final i in argument[index].incorrectAnswers) i,
                 ]..shuffle();
 
-                return Padding(
+                return ListView(
                   padding: const EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Obx(
-                        () => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Question: ${controller.currentIndex + 1} / ${argument.length}',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                const Text('Answered: '),
-                                Text(
-                                  '${controller.answeredQuestion} / ${controller.totalQuestion}',
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(unescape.convert(argument[index].question)),
-                      FormBuilderRadioGroup(
-                        name: formName,
-                        orientation: OptionsOrientation.vertical,
-                        onChanged: (newValue) {
-                          controller.updatePrecentage();
-                        },
-                        options: List.generate(
-                          listAnswer.length,
-                          (index) => FormBuilderFieldOption<String>(
-                            value: listAnswer[index],
-                            child: Text(unescape.convert(listAnswer[index])),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          InkWell(
-                            onTap: () {
-                              controller.triviaQuestionKey.currentState!
-                                  .fields[formName]!
-                                  .reset();
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Row(
-                                children: [
-                                  Icon(Icons.delete),
-                                  Text(
-                                    'Clear Answer',
-                                  ),
-                                ],
+                          Text(
+                            'Question: ${controller.currentIndex + 1} / ${argument.length}',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text('Answered: '),
+                              Text(
+                                '${controller.answeredQuestion} / ${controller.totalQuestion}',
                               ),
-                            ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 5),
+                    Text(unescape.convert(argument[index].question)),
+                    FormBuilderRadioGroup(
+                      name: formName,
+                      orientation: OptionsOrientation.vertical,
+                      onChanged: (newValue) {
+                        controller.updatePrecentage();
+                      },
+                      options: List.generate(
+                        listAnswer.length,
+                        (index) => FormBuilderFieldOption<String>(
+                          value: listAnswer[index],
+                          child: Text(unescape.convert(listAnswer[index])),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            controller.triviaQuestionKey.currentState!
+                                .fields[formName]!
+                                .reset();
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Row(
+                              children: [
+                                Icon(Icons.delete),
+                                Text(
+                                  'Clear Answer',
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 );
               }),
             ),
